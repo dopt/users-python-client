@@ -8,17 +8,17 @@
 Add this dependency to your project's build file:
 
 ```bash
-pip install fern-dopt-users
+pip install dopt-users-python-client
 # or
-poetry add fern-dopt-users
+poetry add dopt-users-python-client
 ```
 
 ## Usage
 
 ```python
-from dopt.client import DoptUsers
+from dopt.client import DoptApis
 
-client = DoptUsers(api_key="YOUR_API_KEY)
+client = DoptApis(api_key="YOUR_API_KEY)
 client.identify_user(
   identifier="my-user-id",
   properties={
@@ -31,9 +31,9 @@ client.identify_user(
 
 ```python
 import asyncio
-from dopt.client import AsyncDoptUsers
+from dopt.client import AsyncDoptApis
 
-async_client = AsyncDoptUsers(api_key="YOUR_API_KEY)
+async_client = AsyncDoptApis(api_key="YOUR_API_KEY)
 
 async def identify_user() -> None:
     client.identify_user(
