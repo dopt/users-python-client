@@ -4,13 +4,13 @@ import datetime as dt
 import typing
 
 import pydantic
+import typing_extensions
 
 from ..core.datetime_utils import serialize_datetime
-from .bad_request_error_response_body_code import BadRequestErrorResponseBodyCode
 
 
 class BadRequestErrorResponseBody(pydantic.BaseModel):
-    code: BadRequestErrorResponseBodyCode
+    code: typing_extensions.Literal["invalid_request_error"]
     details: str
 
     def json(self, **kwargs: typing.Any) -> str:

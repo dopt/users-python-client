@@ -5,7 +5,6 @@ from .errors import BadRequestError, InternalServerError, UnauthorizedError
 from .resources import groups, users
 from .types import (
     BadRequestErrorResponseBody,
-    BadRequestErrorResponseBodyCode,
     IdentifyBatchRequestBody,
     IdentifyBatchRequestBodyItem,
     IdentifyBatchRequestBodyItemGroupsItem,
@@ -28,7 +27,6 @@ from .types import (
 __all__ = [
     "BadRequestError",
     "BadRequestErrorResponseBody",
-    "BadRequestErrorResponseBodyCode",
     "DoptApiEnvironment",
     "IdentifyBatchRequestBody",
     "IdentifyBatchRequestBodyItem",
