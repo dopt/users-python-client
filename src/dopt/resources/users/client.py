@@ -4,13 +4,11 @@ import typing
 import urllib.parse
 from json.decoder import JSONDecodeError
 
-import httpx
 import pydantic
 
 from ...core.api_error import ApiError
+from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
-from ...core.remove_none_from_headers import remove_none_from_headers
-from ...environment import DoptApiEnvironment
 from ...errors.bad_request_error import BadRequestError
 from ...errors.internal_server_error import InternalServerError
 from ...errors.unauthorized_error import UnauthorizedError
@@ -26,9 +24,8 @@ OMIT = typing.cast(typing.Any, ...)
 
 
 class UsersClient:
-    def __init__(self, *, environment: DoptApiEnvironment = DoptApiEnvironment.DEFAULT, api_key: str):
-        self._environment = environment
-        self.api_key = api_key
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._client_wrapper = client_wrapper
 
     def identify_user(
         self,
@@ -37,14 +34,24 @@ class UsersClient:
         properties: typing.Dict[str, typing.Any],
         groups: typing.Optional[typing.List[IdentifyUserRequestBodyGroupsItem]] = OMIT,
     ) -> None:
+        """
+        Identifies a user to the Dopt user API
+
+        Parameters:
+            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+
+            - properties: typing.Dict[str, typing.Any].
+
+            - groups: typing.Optional[typing.List[IdentifyUserRequestBodyGroupsItem]].
+        """
         _request: typing.Dict[str, typing.Any] = {"identifier": identifier, "properties": properties}
         if groups is not OMIT:
             _request["groups"] = groups
-        _response = httpx.request(
+        _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._environment.value}/", "identify"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "identify"),
             json=jsonable_encoder(_request),
-            headers=remove_none_from_headers({"x-api-key": self.api_key}),
+            headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -66,11 +73,17 @@ class UsersClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def identify_users(self, *, request: typing.List[IdentifyBatchRequestBodyItem]) -> IdentifyBatchResponseBody:
-        _response = httpx.request(
+        """
+        Identifies users to the Dopt users API (limited to 100 users per request)
+
+        Parameters:
+            - request: typing.List[IdentifyBatchRequestBodyItem].
+        """
+        _response = self._client_wrapper.httpx_client.request(
             "POST",
-            urllib.parse.urljoin(f"{self._environment.value}/", "identify/batch"),
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "identify/batch"),
             json=jsonable_encoder(request),
-            headers=remove_none_from_headers({"x-api-key": self.api_key}),
+            headers=self._client_wrapper.get_headers(),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -93,9 +106,8 @@ class UsersClient:
 
 
 class AsyncUsersClient:
-    def __init__(self, *, environment: DoptApiEnvironment = DoptApiEnvironment.DEFAULT, api_key: str):
-        self._environment = environment
-        self.api_key = api_key
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
 
     async def identify_user(
         self,
@@ -104,17 +116,26 @@ class AsyncUsersClient:
         properties: typing.Dict[str, typing.Any],
         groups: typing.Optional[typing.List[IdentifyUserRequestBodyGroupsItem]] = OMIT,
     ) -> None:
+        """
+        Identifies a user to the Dopt user API
+
+        Parameters:
+            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+
+            - properties: typing.Dict[str, typing.Any].
+
+            - groups: typing.Optional[typing.List[IdentifyUserRequestBodyGroupsItem]].
+        """
         _request: typing.Dict[str, typing.Any] = {"identifier": identifier, "properties": properties}
         if groups is not OMIT:
             _request["groups"] = groups
-        async with httpx.AsyncClient() as _client:
-            _response = await _client.request(
-                "POST",
-                urllib.parse.urljoin(f"{self._environment.value}/", "identify"),
-                json=jsonable_encoder(_request),
-                headers=remove_none_from_headers({"x-api-key": self.api_key}),
-                timeout=60,
-            )
+        _response = await self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "identify"),
+            json=jsonable_encoder(_request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
@@ -134,14 +155,19 @@ class AsyncUsersClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def identify_users(self, *, request: typing.List[IdentifyBatchRequestBodyItem]) -> IdentifyBatchResponseBody:
-        async with httpx.AsyncClient() as _client:
-            _response = await _client.request(
-                "POST",
-                urllib.parse.urljoin(f"{self._environment.value}/", "identify/batch"),
-                json=jsonable_encoder(request),
-                headers=remove_none_from_headers({"x-api-key": self.api_key}),
-                timeout=60,
-            )
+        """
+        Identifies users to the Dopt users API (limited to 100 users per request)
+
+        Parameters:
+            - request: typing.List[IdentifyBatchRequestBodyItem].
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "POST",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "identify/batch"),
+            json=jsonable_encoder(request),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
         if 200 <= _response.status_code < 300:
             return pydantic.parse_obj_as(IdentifyBatchResponseBody, _response.json())  # type: ignore
         if _response.status_code == 400:

@@ -9,7 +9,7 @@ from ..core.datetime_utils import serialize_datetime
 
 
 class IdentifyBatchRequestBodyItemGroupsItem(pydantic.BaseModel):
-    identifier: str = pydantic.Field(description=('<span style="white-space: nowrap">`non-empty`</span>\n'))
+    identifier: str = pydantic.Field(description='<span style="white-space: nowrap">`non-empty`</span>')
     properties: typing.Dict[str, typing.Any]
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -22,4 +22,5 @@ class IdentifyBatchRequestBodyItemGroupsItem(pydantic.BaseModel):
 
     class Config:
         frozen = True
+        smart_union = True
         json_encoders = {dt.datetime: serialize_datetime}

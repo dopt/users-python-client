@@ -11,12 +11,8 @@ from ..core.datetime_utils import serialize_datetime
 
 class IdentifySegmentRequestBodyIdentifySegmentRequestBody(pydantic.BaseModel):
     type: typing_extensions.Literal["group"]
-    group_id: str = pydantic.Field(
-        alias="groupId", description=('<span style="white-space: nowrap">`non-empty`</span>\n')
-    )
-    user_id: str = pydantic.Field(
-        alias="userId", description=('<span style="white-space: nowrap">`non-empty`</span>\n')
-    )
+    group_id: str = pydantic.Field(alias="groupId", description='<span style="white-space: nowrap">`non-empty`</span>')
+    user_id: str = pydantic.Field(alias="userId", description='<span style="white-space: nowrap">`non-empty`</span>')
     traits: typing.Dict[str, typing.Any]
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -29,5 +25,6 @@ class IdentifySegmentRequestBodyIdentifySegmentRequestBody(pydantic.BaseModel):
 
     class Config:
         frozen = True
+        smart_union = True
         allow_population_by_field_name = True
         json_encoders = {dt.datetime: serialize_datetime}

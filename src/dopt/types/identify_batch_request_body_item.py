@@ -10,7 +10,7 @@ from .identify_batch_request_body_item_groups_item import IdentifyBatchRequestBo
 
 
 class IdentifyBatchRequestBodyItem(pydantic.BaseModel):
-    identifier: str = pydantic.Field(description=('<span style="white-space: nowrap">`non-empty`</span>\n'))
+    identifier: str = pydantic.Field(description='<span style="white-space: nowrap">`non-empty`</span>')
     properties: typing.Dict[str, typing.Any]
     groups: typing.Optional[typing.List[IdentifyBatchRequestBodyItemGroupsItem]]
 
@@ -24,4 +24,5 @@ class IdentifyBatchRequestBodyItem(pydantic.BaseModel):
 
     class Config:
         frozen = True
+        smart_union = True
         json_encoders = {dt.datetime: serialize_datetime}
