@@ -44,7 +44,7 @@ class UsersClient:
             "POST",
             urllib.parse.urljoin(f"{self._environment.value}/", "identify"),
             json=jsonable_encoder(_request),
-            headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+            headers=remove_none_from_headers({"x-api-key": self.api_key}),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -70,7 +70,7 @@ class UsersClient:
             "POST",
             urllib.parse.urljoin(f"{self._environment.value}/", "identify/batch"),
             json=jsonable_encoder(request),
-            headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+            headers=remove_none_from_headers({"x-api-key": self.api_key}),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -112,7 +112,7 @@ class AsyncUsersClient:
                 "POST",
                 urllib.parse.urljoin(f"{self._environment.value}/", "identify"),
                 json=jsonable_encoder(_request),
-                headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+                headers=remove_none_from_headers({"x-api-key": self.api_key}),
                 timeout=60,
             )
         if 200 <= _response.status_code < 300:
@@ -139,7 +139,7 @@ class AsyncUsersClient:
                 "POST",
                 urllib.parse.urljoin(f"{self._environment.value}/", "identify/batch"),
                 json=jsonable_encoder(request),
-                headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+                headers=remove_none_from_headers({"x-api-key": self.api_key}),
                 timeout=60,
             )
         if 200 <= _response.status_code < 300:

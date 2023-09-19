@@ -29,7 +29,7 @@ class GroupsClient:
             "POST",
             urllib.parse.urljoin(f"{self._environment.value}/", "identify/group"),
             json=jsonable_encoder({"identifier": identifier, "properties": properties}),
-            headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+            headers=remove_none_from_headers({"x-api-key": self.api_key}),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -62,7 +62,7 @@ class AsyncGroupsClient:
                 "POST",
                 urllib.parse.urljoin(f"{self._environment.value}/", "identify/group"),
                 json=jsonable_encoder({"identifier": identifier, "properties": properties}),
-                headers=remove_none_from_headers({"X-Api-Key": self.api_key}),
+                headers=remove_none_from_headers({"x-api-key": self.api_key}),
                 timeout=60,
             )
         if 200 <= _response.status_code < 300:
