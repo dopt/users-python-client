@@ -7,10 +7,13 @@ from .identify_batch_request_body_item_groups_item import IdentifyBatchRequestBo
 from .identify_batch_response_body import IdentifyBatchResponseBody
 from .identify_request_body import IdentifyRequestBody
 from .identify_request_params import IdentifyRequestParams
-from .identify_segment_request_body import IdentifySegmentRequestBody
-from .identify_segment_request_body_identify_segment_request_body import (
-    IdentifySegmentRequestBodyIdentifySegmentRequestBody,
+from .identify_segment_request_body import (
+    IdentifySegmentRequestBody,
+    IdentifySegmentRequestBody_Group,
+    IdentifySegmentRequestBody_Identify,
 )
+from .identify_segment_request_body_group import IdentifySegmentRequestBodyGroup
+from .identify_segment_request_body_identify import IdentifySegmentRequestBodyIdentify
 from .identify_segment_response_body import IdentifySegmentResponseBody
 from .identify_user_request_body_groups_item import IdentifyUserRequestBodyGroupsItem
 from .internal_server_error_response_body import InternalServerErrorResponseBody
@@ -30,7 +33,10 @@ __all__ = [
     "IdentifyRequestBody",
     "IdentifyRequestParams",
     "IdentifySegmentRequestBody",
-    "IdentifySegmentRequestBodyIdentifySegmentRequestBody",
+    "IdentifySegmentRequestBodyGroup",
+    "IdentifySegmentRequestBodyIdentify",
+    "IdentifySegmentRequestBody_Group",
+    "IdentifySegmentRequestBody_Identify",
     "IdentifySegmentResponseBody",
     "IdentifyUserRequestBodyGroupsItem",
     "InternalServerErrorResponseBody",

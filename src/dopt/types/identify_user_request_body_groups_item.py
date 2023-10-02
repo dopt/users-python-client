@@ -9,7 +9,7 @@ from ..core.datetime_utils import serialize_datetime
 
 
 class IdentifyUserRequestBodyGroupsItem(pydantic.BaseModel):
-    identifier: str = pydantic.Field(description='<span style="white-space: nowrap">`non-empty`</span>')
+    identifier: str
     properties: typing.Dict[str, typing.Any]
 
     def json(self, **kwargs: typing.Any) -> str:

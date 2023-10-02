@@ -38,7 +38,7 @@ class UsersClient:
         Identifies a user to the Dopt user API
 
         Parameters:
-            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+            - identifier: str.
 
             - properties: typing.Dict[str, typing.Any].
 
@@ -120,7 +120,7 @@ class AsyncUsersClient:
         Identifies a user to the Dopt user API
 
         Parameters:
-            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+            - identifier: str.
 
             - properties: typing.Dict[str, typing.Any].
 

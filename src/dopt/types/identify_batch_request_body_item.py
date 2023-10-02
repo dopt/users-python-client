@@ -10,7 +10,7 @@ from .identify_batch_request_body_item_groups_item import IdentifyBatchRequestBo
 
 
 class IdentifyBatchRequestBodyItem(pydantic.BaseModel):
-    identifier: str = pydantic.Field(description='<span style="white-space: nowrap">`non-empty`</span>')
+    identifier: str
     properties: typing.Dict[str, typing.Any]
     groups: typing.Optional[typing.List[IdentifyBatchRequestBodyItemGroupsItem]]
 

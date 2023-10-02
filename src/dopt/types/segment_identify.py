@@ -11,7 +11,7 @@ from ..core.datetime_utils import serialize_datetime
 
 class SegmentIdentify(pydantic.BaseModel):
     type: typing_extensions.Literal["identify"]
-    user_id: str = pydantic.Field(alias="userId", description='<span style="white-space: nowrap">`non-empty`</span>')
+    user_id: str = pydantic.Field(alias="userId")
     traits: typing.Dict[str, typing.Any]
 
     def json(self, **kwargs: typing.Any) -> str:

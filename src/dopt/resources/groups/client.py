@@ -29,7 +29,7 @@ class GroupsClient:
         Identifies a group to the Dopt user API
 
         Parameters:
-            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+            - identifier: str.
 
             - properties: typing.Dict[str, typing.Any].
         """
@@ -68,7 +68,7 @@ class AsyncGroupsClient:
         Identifies a group to the Dopt user API
 
         Parameters:
-            - identifier: str. <span style="white-space: nowrap">`non-empty`</span>
+            - identifier: str.
 
             - properties: typing.Dict[str, typing.Any].
         """
