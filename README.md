@@ -1,7 +1,7 @@
 # Dopt Users Python Library
 
 [![pypi](https://img.shields.io/pypi/v/dopt-users-python-client.svg)](https://pypi.python.org/pypi/dopt-users-python-client)
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=dopt/users-python-client/readme)
 
 ## Installation
 
